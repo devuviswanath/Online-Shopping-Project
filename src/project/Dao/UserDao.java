@@ -1,7 +1,9 @@
 package project.Dao;
 
 import java.sql.*;
-import project.model.User;
+
+import project.model.*;
+import project.connection.*;
 
 public class UserDao {
 	private Connection con;
@@ -13,6 +15,23 @@ public class UserDao {
 		this.con=con;
 	}
 
+	public boolean userSignup(User model) {
+        boolean result = false;
+        try {
+            query = "insert into users (name, email, securityQuestion, answer,password) values(?,?,?,?,?)";
+            pst = this.con.prepareStatement(query);
+            pst.setString(1,model.getName());
+            pst.setString(2, model.getEmail());
+            pst.setString(3,model.getSecurityQuestion());
+            pst.setString(4, model.getAnswer());
+            pst.setString(5,model.getPassword());
+            pst.executeUpdate();
+            result = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
 
 
 	public User userLogin(String email, String password) {
@@ -25,6 +44,8 @@ public class UserDao {
             rs = pst.executeQuery();
             if(rs.next()){
             	user = new User();
+            	user.setId(rs.getInt("id"));
+            	user.setName(rs.getString("name"));
             	user.setEmail(rs.getString("email"));
             }
         } catch (SQLException e) {

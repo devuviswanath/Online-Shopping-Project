@@ -1,7 +1,8 @@
 package project.model;
 //                                                Data Access Object 
 public class User {
-	private int name;
+	private int id;
+	private String name;
 	private String email;
 	private String securityQuestion;
 	private String answer;
@@ -10,19 +11,28 @@ public class User {
 	public User() {
 	}
 
-	public User(int name, String email, String securityQuestion, String answer, String password) {
+	public User(int id,String name, String email, String securityQuestion, String answer, String password) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.securityQuestion = securityQuestion;
 		this.answer = answer;
 		this.password = password;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
-	public int getName() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -60,7 +70,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", securityQuestion=" + securityQuestion + ", answer="
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", securityQuestion=" + securityQuestion + ", answer="
 				+ answer + ", password=" + password + "]";
 	}
 

@@ -1,5 +1,4 @@
 body {
-  background-color: #0080FF;
   font: 1em Helvetica;
 }
 
@@ -7,26 +6,6 @@ body {
   width: 840px;
   margin: 25px auto;
   margin-top: 50px;
-}
-
-.whysign {
-  float: left;
-  background-color: white;
-  width: 480px;
-  height: 468px;
-  border-radius: 0 5px 5px 0;
-  padding-top: 20px;
-  padding-right: 20px;
-}
-.whysignLogin
-{
-  float: left;
-  background-color: white;
-  width: 480px;
-  height: 298px;
-  border-radius: 0 5px 5px 0;
-  padding-top: 20px;
-  padding-right: 20px;
 }
 
 .signup {

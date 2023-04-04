@@ -7,16 +7,20 @@
 	if(auth!=null){
 		response.sendRedirect("index.jsp");
 	}
+	//cart badge	
+		ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+		if(cart_list !=null){
+			request.setAttribute("cart_list",cart_list);
+		}
 	%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/includes/head.jsp"%>
-<title>Shopping Cart</title>
+<%@include file="/includes/header.jsp"%>
+<title>Login Page</title>
 </head>
 <body>
-	<%@include file="/includes/navbar.jsp"%>
 
 	<div class="container">
 		<div class="card w-50 mx-auto my-5">
