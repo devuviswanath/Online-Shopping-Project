@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/signup-style.css">
+<link rel="stylesheet" href="css/style.css">
 <%@include file="/includes/header.jsp"%>
 <title>Signup Page</title>
 </head>
