@@ -24,7 +24,7 @@
 <body>
 	<div class="container">
 		<div class="card w-50 mx-auto my-5">
-			<div class="card-header text-center">Sign Up</div>
+			<div class="card-header text-center">SignUp</div>
 			<div class="card-body">
 				<form action="sign-up" method="post">
 					<div class="form-group">
