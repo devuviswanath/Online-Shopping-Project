@@ -23,8 +23,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/includes/header.jsp"%>
 <title>Home page</title>
+<%@include file="/includes/header.jsp"%>
 </head>
 <body>
 
