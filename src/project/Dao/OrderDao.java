@@ -64,6 +64,34 @@ public class OrderDao {
         }
         return list;
     }
+	public List<Order> getAllOrders(){
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			query = "select * from orders";
+			pst = this.con.prepareStatement(query);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				Order row = new Order();
+				ProductDao productDao = new ProductDao(this.con);
+                int pId = rs.getInt("productId");
+                Product product = productDao.getSingleProduct(pId);
+				row.setOrderId(rs.getInt("orderId"));
+				row.setId(pId);
+				row.setName(product.getName());
+				row.setCategory(product.getCategory());
+				row.setPrice(product.getPrice()*rs.getInt("quantity"));
+				row.setQuantity(rs.getInt("quantity"));
+				row.setDate(rs.getString("date"));
+				
+				orders.add(row);
+				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return orders;
+	}
 
     public void cancelOrder(int id) {
         //boolean result = false;

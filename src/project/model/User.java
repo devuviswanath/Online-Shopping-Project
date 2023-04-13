@@ -1,5 +1,5 @@
 package project.model;
-//                                                Data Access Object 
+
 public class User {
 	private int id;
 	private String name;

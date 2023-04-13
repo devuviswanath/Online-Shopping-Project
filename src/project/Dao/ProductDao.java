@@ -3,6 +3,7 @@ package project.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import project.model.*;
 
@@ -14,6 +15,25 @@ public class ProductDao {
 	public ProductDao(Connection con) {
 		this.con = con;
 	}
+	public boolean addProduct(Product model) {
+        boolean result = false;
+        try {
+            query = "insert into products (name, category, price, image) values(?,?,?,?)";
+            pst = this.con.prepareStatement(query);
+            pst.setString(1,model.getName());
+            pst.setString(2, model.getCategory());
+            pst.setDouble(3,model.getPrice());
+            pst.setString(4, model.getImage());
+            pst.executeUpdate();
+            result = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+	
+	
+	
 	
 	public List<Product> getAllProducts(){
 		List<Product> products = new ArrayList<Product>();
@@ -114,6 +134,21 @@ public class ProductDao {
     	}
     	return sum;
     	
+    }
+    
+    public void deleteProduct (int id) {
+        //boolean result = false;
+        try {
+            query = "delete from products where id=?";
+            pst = this.con.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.execute();
+            //result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.print(e.getMessage());
+        }
+        //return result;
     }
 	
 	

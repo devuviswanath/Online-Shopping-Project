@@ -5,11 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%
-	User auth = (User) request.getSession().getAttribute("auth");
-	if(auth!=null){
-		request.setAttribute("auth",auth);
-	}
-	
+
 	ProductDao pd =new ProductDao(ConnectionProvider.getConnection());
 	List<Product> products = pd.getAllProducts();
 //cart badge	
@@ -25,7 +21,7 @@
 <head>
 <title>Home page</title>
 
-<%@include file="/includes/header.jsp"%>
+<%@include file="/admin/adminHeader.jsp"%>
 <style type="text/css">
 .grid-container {
   display: grid;
@@ -54,14 +50,14 @@
 			{%>
 				<div class="grid-container">
 				<div class="card w-100">
-					<img class="grid-item" src="product-image/<%= p.getImage() %>" alt="Card image cap">
+					<img class="grid-item" src="../product-image/<%= p.getImage() %>" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title"><%= p.getName()%></h5>
 						<h6 class="price">Price:$<%= p.getPrice()%></h6>
 						<h6 class="category">Category:<%= p.getCategory() %> </h6>
 						<div class="mt-3 d-flex justify-content-between">
-							<a class="btn btn-dark" href="add-to-cart?id=<%= p.getId() %>">Add to Cart</a> <a
-								class="btn btn-primary" href="order-now?quantity=1&id=<%= p.getId()%>">Buy Now</a>
+							<a class="btn btn-dark" href="../delete-product?id=<%= p.getId() %>">Delete</a>
+								
 						</div>
 					</div>
 				</div>
@@ -74,6 +70,6 @@
 		</div>
 	</div>
 
-	<%@include file="/includes/footer.jsp"%>
+	<%@include file="/admin/adminFooter.jsp"%>
 </body>
 </html>

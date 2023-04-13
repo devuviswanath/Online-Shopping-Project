@@ -21,22 +21,41 @@ import project.model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.sendRedirect("login.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html:charset=UTF-8");
+		
+		
 		try(PrintWriter out = response.getWriter()){
+			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			UserDao ulogin = new UserDao(ConnectionProvider.getConnection());
 			User user = ulogin.userLogin(email, password);
 			if (user != null) {
 				request.getSession().setAttribute("auth", user);
-				response.sendRedirect("index.jsp");
+				if("admin@gmail.com".equals(email)) {
+					System.out.println("------admin");
+					response.sendRedirect("admin/admin.jsp");
+					
+					}else {
+						
+						response.sendRedirect("index.jsp");
+						
+					}
+					
+				
 			} else {
-				out.println("there is no user");
+				response.setContentType("text/html; charset=UTF-8");
+                PrintWriter let = response.getWriter();
+                out.println("<script>");
+                out.println("alert('User not found please try again');");
+                out.println("window.location.replace('login.jsp');");
+                out.println("</script>");
 			}
 				} 
 		catch (ClassNotFoundException | SQLException e) 
@@ -46,5 +65,4 @@ public class LoginServlet extends HttpServlet {
 
 
 		}
-	}
-
+}

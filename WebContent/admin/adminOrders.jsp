@@ -6,27 +6,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	User auth = (User) request.getSession().getAttribute("auth");
-	List<Order> orders = null;
-	if (auth != null) {
-		request.setAttribute("auth", auth);
-		orders = new OrderDao(ConnectionProvider.getConnection()).userOrders(auth.getId());
-	} else {
-		response.sendRedirect("login.jsp");
-	}
 
-	//cart badge	
-	ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-	if (cart_list != null) {
-		request.setAttribute("cart_list", cart_list);
-	}
+OrderDao pd =new OrderDao(ConnectionProvider.getConnection());
+List<Order> orders = pd.getAllOrders();
+
 %>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/includes/header.jsp"%>
+<%@include file="/admin/adminHeader.jsp"%>
 <title>Order Page</title>
 <style type="text/css">
 body{
@@ -48,7 +38,6 @@ body{
 					<th scope="col">Category</th>
 					<th scope="col">Quantity</th>
 					<th scope="col">Price</th>
-					<th scope="col">Cancel</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,8 +51,6 @@ body{
 					<td><%=o.getCategory()%></td>
 					<td><%=o.getQuantity()%></td>
 					<td><%=o.getPrice()%></td>
-					<td><a class="btn btn-sm btn-danger"
-						href="cancel-order?id=<%=o.getOrderId()%>">Cancel Order</a></td>
 				</tr>
 				<%
 					}
@@ -73,5 +60,5 @@ body{
 		</table>
 	</div>
 </body>
-<%@include file="/includes/footer.jsp"%>
+<%@include file="/admin/adminFooter.jsp"%>
 </html>

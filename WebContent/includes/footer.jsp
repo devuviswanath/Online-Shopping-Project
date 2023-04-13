@@ -14,6 +14,17 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<style type="text/css">
+footer {  
+ background: rgb(9, 95, 234);  
+  color: white;  
+  position:relative; 
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   margin-top:auto;
+} 	
+	</style>
 </head>
 <body >
 
@@ -31,8 +42,8 @@
 						<div class="footer-pad">
 							<h4>Links</h4>
 							<ul class="list-unstyled">
-								<li><a href="#!">About Us</a></li>
-								<li><a href="#!">Contact Us</a></li>
+								<li><a href="aboutus.jsp">About Us</a></li>
+								<li><a href="contactus.jsp">Contact Us</a></li>
 							</ul>
 						</div>
 					</div>

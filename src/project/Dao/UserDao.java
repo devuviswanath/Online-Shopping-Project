@@ -1,6 +1,8 @@
 package project.Dao;
-
+//Data Access Object 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import project.model.*;
 import project.connection.*;
@@ -32,6 +34,31 @@ public class UserDao {
         }
         return result;
     }
+	public List<User> getAllUser(){
+		List<User> users = new ArrayList<User>();
+		try {
+			query = "select * from users";
+			pst = this.con.prepareStatement(query);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				User row = new User();
+				row.setId(rs.getInt("id"));
+				row.setName(rs.getString("name"));
+				row.setEmail(rs.getString("email"));
+				row.setSecurityQuestion(rs.getString("securityQuestion"));
+				row.setAnswer(rs.getString("answer"));
+				row.setPassword(rs.getString("password"));
+				
+				
+				users.add(row);
+				
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return users;
+	}
 
 
 	public User userLogin(String email, String password) {
@@ -53,4 +80,36 @@ public class UserDao {
         }
         return user;
     }
+	
+	
+	public boolean userForgotPassword(String email, String password) {
+		boolean result = false;
+        try {
+            query = "update users set  password = ? where email=='"+email+"'"; 
+            		
+            pst = this.con.prepareStatement(query);
+            pst.setString(1, password);
+            pst.executeUpdate();
+            result = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+	
+    public void deleteUser (int id) {
+        //boolean result = false;
+        try {
+            query = "delete from users where id=?";
+            pst = this.con.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.execute();
+            //result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.print(e.getMessage());
+        }
+        //return result;
+    }
+	
 }

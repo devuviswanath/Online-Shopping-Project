@@ -3,9 +3,6 @@ package project.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,59 +10,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project.Dao.*;
+import project.Dao.UserDao;
 import project.connection.ConnectionProvider;
-import project.model.*;
-import java.sql.*;
+import project.model.User;
 
 /**
- * Servlet implementation class SignupServlet
+ * Servlet implementation class ForgotPasswordServlet
  */
-@WebServlet("/sign-up")
-public class SignupServlet extends HttpServlet {
+@WebServlet("/forgot-password")
+public class ForgotPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignupServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    public ForgotPasswordServlet() {
+
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException 
-	{
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html:charset=UTF-8");
 		try(PrintWriter out = response.getWriter()){
-			
-			User userModel = new User();
-			userModel.setName(request.getParameter("name"));
-			userModel.setEmail(request.getParameter("email"));
-			userModel.setSecurityQuestion(request.getParameter("securityQuestion"));
-			userModel.setAnswer(request.getParameter("answer"));
-			userModel.setPassword(request.getParameter("password"));
+			String email = request.getParameter("email");
+			String password = request.getParameter("newpassword");
             UserDao userDao = new UserDao(ConnectionProvider.getConnection());
-            boolean result = userDao.userSignup(userModel); 
+            boolean result = userDao.userForgotPassword(email, password); 
             if (result) {
                 response.sendRedirect("login.jsp");
             } else{
             	response.setContentType("text/html; charset=UTF-8");
                 PrintWriter let = response.getWriter();
                 out.println("<script>");
-                out.println("alert('Email id already registered please choose another one');");
-                out.println("window.location.replace('signup.jsp');");
+                out.println("alert('Please enter a valid email');");
+                out.println("window.location.replace('forgotPassword.jsp');");
                 out.println("</script>");
             }
 
     } catch (ClassNotFoundException|SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	} 
-}
+	}
+	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
