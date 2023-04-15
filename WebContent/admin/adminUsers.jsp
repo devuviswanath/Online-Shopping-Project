@@ -45,19 +45,19 @@ body{
 				<%
 					if (users != null) {
 						for (User u : users) {
-				%>
+				if(!"admin@gmail.com".equals(u.getEmail())){ %>
 				<tr>
 					<td><%=u.getName()%></td>
 					<td><%=u.getEmail()%></td>
 					<td>
-					<%if(!"admin@gmail.com".equals(u.getEmail())){ %>
+					
 					<a class="btn btn-sm btn-danger"
 						href="../delete-user?id=<%=u.getId()%>">Delete User</a>
-						<% }%>
+						
 						</td>
 						
 				</tr>
-				<%
+				<% }
 					}
 					}
 				%>

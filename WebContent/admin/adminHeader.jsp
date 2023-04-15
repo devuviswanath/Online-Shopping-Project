@@ -16,7 +16,7 @@
 
 	<nav class="navbar navbar-expand-lg ">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp">Shopping Cart</a>
+			<a class="navbar-brand" href="admin.jsp">Shopping Cart</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -31,6 +31,7 @@
 					<li class="nav-item"><a class="nav-link" href="adminOrders.jsp">Orders</a></li>
 					<li class="nav-item"><a class="nav-link" href="adminUsers.jsp">Users</a></li>
 					<li class="nav-item"><a class="nav-link" href="../log-out">Logout</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">ADMIN</a></li>
 				</ul>
 			</div>
 		</div>

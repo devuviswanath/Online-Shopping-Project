@@ -24,7 +24,7 @@
     <div class="card w-50 mx-auto my-5">
       <div class="card-header text-center">Contact Us</div>
       <div class="card-body">
-        <form action="https://formsubmit.co/el/dixuvo" method="POST" />
+        <form action="mailProcess.jsp" method="POST" />
 
           <div class="form-group">
             <label>Name</label> <input type="text" name="name" class="form-control" placeholder="Name" required>
